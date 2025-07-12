@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+<style>
+    /* Background */
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to right, #ffb6b9, #fcefee);
+        margin: 0;
+    }
+
+    /* Centered container */
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 300px;
+    }
+
+    /* Input box */
+    input {
+        width: 90%;
+        padding: 10px;
+        border: 2px solid #ff80ab;
+        border-radius: 5px;
+        outline: none;
+        font-size: 16px;
+    }
+
+    /* Buttons */
+    button {
+        background-color: #ff4081;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background-color: #f50057;
+    }
+
+    /* Horizontal Line */
+    hr {
+        margin: 15px 0;
+        border: none;
+        height: 1px;
+        background: #ddd;
+    }
+
+    /* Sign In / Sign Up Button */
+    #sign-in {
+        background-color: #4A90E2;
+    }
+
+    #sign-in:hover {
+        background-color: #357ABD;
+    }
+</style>
+<script>
+    async function addtask(){
+        const todo = document.getElementById("task-input").value;
+        const token = localStorage.getItem("token");
+        axios.post("http://localhost:3000/addtask",
+        {todo:todo},
+        { headers: { "Authorization": `Bearer ${token}` } })
+
+        
+        alert("Todo added succesfuly !");
+
+    }
+    
+
+</script>
+<body>
+    
+    <div class="container">
+        <input type="text" id="task-input" placeholder="Enter a task">
+        <button id="add-task" onclick="addtask()">Add Task</button>
+
+        <hr>
+        <a href="/signin">
+            <button id="sign-in">Change user</button>
+        </a>
+    </div>
+
+</body>
+
+</html>
